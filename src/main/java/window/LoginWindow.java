@@ -36,7 +36,6 @@ public class LoginWindow extends Application {
         controller.setService(Main.getService());
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.setTitle("Application");
-        //primaryStage.setIconified(true);
         primaryStage.getIcons().add(new Image("/imgs/logo.png"));
         primaryStage.show();
     }
