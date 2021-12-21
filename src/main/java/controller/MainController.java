@@ -17,8 +17,13 @@ import javafx.scene.paint.Color;
 import service.Service;
 
 import javafx.util.Callback;
+import utils.RequestStatus;
+import utils.UsersStatus;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -52,16 +57,38 @@ public class MainController {
                 ListCell<UserDTO> cell = new ListCell<UserDTO>() {
                     private final AnchorPane anchorPane = new AnchorPane();
                     private final Label label = new Label();
-                    private final Button button = new Button("Action");
+                    private final Button buttonAddFriend = new Button("Add friend");
+                    private final Button buttonCancelRequest = new Button ("Cancel request");
+                    private final Label labelAlreadyFriends = new Label();
+
+                    private final HBox respondRequest = new HBox();
+                    private final Button acceptRequest = new Button("Accept");
+                    private final Button denyRequest = new Button("Deny");
 
                     {
                         this.setStyle("-fx-background-color: #1a1a1a; -fx-font-size:13;");
                         label.setStyle("-fx-text-fill: white; ");
-                        button.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
+                        buttonAddFriend.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
+                        buttonCancelRequest.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
+                        acceptRequest.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
+                        denyRequest.setStyle("-fx-background-color: white; -fx-text-fill: black;");
+                        labelAlreadyFriends.setStyle("-fx-text-fill: white; ");
 
                         anchorPane.getChildren().add(label);
-                        AnchorPane.setRightAnchor(button, 1d);
-                        anchorPane.getChildren().add(button);
+
+                        AnchorPane.setRightAnchor(buttonAddFriend, 1d);
+                        anchorPane.getChildren().add(buttonAddFriend);
+
+                        AnchorPane.setRightAnchor(buttonCancelRequest, 1d);
+                        anchorPane.getChildren().add(buttonCancelRequest);
+
+                        AnchorPane.setRightAnchor(labelAlreadyFriends, 1d);
+                        anchorPane.getChildren().add(labelAlreadyFriends);
+
+                        AnchorPane.setRightAnchor(respondRequest, 1d);
+                        anchorPane.getChildren().add(respondRequest);
+                        respondRequest.getChildren().add(acceptRequest);
+                        respondRequest.getChildren().add(denyRequest);
                     }
 
                     @Override
@@ -72,6 +99,51 @@ public class MainController {
                             setGraphic(null);
                         } else {
                             label.setText(item.getName());
+                            if (Objects.equals(item.getStatus(), UsersStatus.FRIENDS.toString()))
+                            {
+                                buttonAddFriend.setVisible(false);
+                                buttonCancelRequest.setVisible(false);
+                                labelAlreadyFriends.setText("Friends!");
+                                respondRequest.setVisible(false);
+                            }
+                            else if (Objects.equals(item.getStatus(), UsersStatus.REQUESTSENT.toString()))
+                            {
+                                buttonAddFriend.setVisible(false);
+                                buttonCancelRequest.setVisible(true);
+                                labelAlreadyFriends.setVisible(false);
+                                respondRequest.setVisible(false);
+                            }
+                            else if (Objects.equals(item.getStatus(), UsersStatus.REQUESTRECEIVED.toString()))
+                            {
+                                buttonAddFriend.setVisible(false);
+                                buttonCancelRequest.setVisible(false);
+                                labelAlreadyFriends.setVisible(false);
+                                respondRequest.setVisible(true);
+                            }
+                            else if (Objects.equals(item.getStatus(), UsersStatus.REJECTED.toString()) || Objects.equals(item.getStatus(), UsersStatus.NOTFRIENDS.toString()))
+                            {
+                                buttonAddFriend.setVisible(true);
+                                buttonCancelRequest.setVisible(false);
+                                labelAlreadyFriends.setVisible(false);
+                                respondRequest.setVisible(false);
+                            }
+
+                            buttonAddFriend.setOnAction((ActionEvent event) -> {
+                                service.sendFriendRequest(user.getId(), item.getId(), LocalDateTime.now());
+                                buttonAddFriend.setVisible(false);
+                                buttonCancelRequest.setVisible(true);
+                            });
+                            buttonCancelRequest.setOnAction((ActionEvent event) -> {
+                                service.deleteRequest(user.getId(), item.getId());
+                                buttonAddFriend.setVisible(true);
+                                buttonCancelRequest.setVisible(false);
+                            });
+                            acceptRequest.setOnAction((ActionEvent event) -> {
+                                service.updateRequest(item.getId(), user.getId(), LocalDateTime.now(), RequestStatus.APPROVED.toString());
+                                respondRequest.setVisible(false);
+                                labelAlreadyFriends.setVisible(true);
+                                labelAlreadyFriends.setStyle("-fx-text-fill: white;");
+                            });
                             setGraphic(anchorPane);
                         }
                     }
@@ -86,7 +158,7 @@ public class MainController {
     {
         return service.getAllUsers().stream()
                 .filter(u -> u.getId() != user.getId())
-                .map(u -> new UserDTO(u.getId(), u.getLastName() + " " + u.getFirstName(), "status"))
+                .map(u -> new UserDTO(u.getId(), u.getLastName() + " " + u.getFirstName(), service.getStatus(user, u)))
                 .collect(Collectors.toList());
     }
 

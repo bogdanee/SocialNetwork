@@ -10,6 +10,7 @@ import repository.database.RequestDbRepository;
 import repository.memory.FriendshipRepository;
 import repository.memory.UserRepository;
 import utils.RequestStatus;
+import utils.UsersStatus;
 import validator.FriendshipValidator;
 import validator.UserValidator;
 
@@ -94,6 +95,11 @@ public class Service {
                 .filter(x -> x.getId1() == idUser || x.getId2() == idUser)
                 .collect(Collectors.toList());
         userRequest.forEach(x -> requestRepo.delete(x.getId1(), x.getId2()));
+    }
+
+    public void deleteRequest(int idSender, int idReceiver)
+    {
+        requestRepo.delete(idSender, idReceiver);
     }
 
     /**
@@ -391,5 +397,22 @@ public class Service {
         if (Objects.equals(status, "APPROVED"))
             friendshipRepo.add(createFriendship(idSender, idReceiver, date));
         requestRepo.update(request);
+    }
+
+    public String getStatus (User loggedUser, User searchedUser)
+    {
+        if (this.findFriendship(loggedUser.getId(), searchedUser.getId()) != null)
+            return UsersStatus.FRIENDS.toString();
+        List<FriendRequest> friendRequests = requestRepo.getAll();
+        for (FriendRequest friendRequest : friendRequests)
+        {
+            if (friendRequest.getId1() == loggedUser.getId() && friendRequest.getId2() == searchedUser.getId() && friendRequest.getStatus() == RequestStatus.PENDING)
+                return UsersStatus.REQUESTSENT.toString();
+            else if (friendRequest.getId2() == loggedUser.getId() && friendRequest.getId1() == searchedUser.getId() && friendRequest.getStatus() == RequestStatus.PENDING)
+                return UsersStatus.REQUESTRECEIVED.toString();
+            else if (friendRequest.getId1() == loggedUser.getId() && friendRequest.getId2() == searchedUser.getId() && friendRequest.getStatus() == RequestStatus.REJECTED)
+                return UsersStatus.REJECTED.toString();
+        }
+        return UsersStatus.NOTFRIENDS.toString();
     }
 }
