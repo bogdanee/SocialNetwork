@@ -11,10 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.Main;
 import service.Service;
 
@@ -34,6 +36,8 @@ public class LoginWindow extends Application {
         controller.setService(Main.getService());
         primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.setTitle("Application");
+        primaryStage.setIconified(true);
+        primaryStage.getIcons().add(new Image("/imgs/logo.png"));
         primaryStage.show();
     }
 

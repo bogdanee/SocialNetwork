@@ -15,4 +15,6 @@ module com.example.SocialNetwork.main {
     exports window;
     opens window to javafx.fxml;
 
+    opens domain;
+
 }

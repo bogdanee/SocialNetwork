@@ -64,6 +64,7 @@ public class LoginController {
             labelError.setText("");
             Stage newWindow = (Stage) buttonLogin.getScene().getWindow();
             MainWindow main = new MainWindow();
+            main.setUser(user);
             main.start(newWindow);
         }
     }
