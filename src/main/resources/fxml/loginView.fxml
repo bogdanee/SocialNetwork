@@ -5,12 +5,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane opacity="0.8" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <TextField fx:id="textFieldUsername" layoutX="100.0" layoutY="115.0" prefHeight="0.0" prefWidth="200.0" promptText="Username" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray;" />
+      <TextField fx:id="textFieldUsername" layoutX="100.0" layoutY="115.0" prefHeight="27.0" prefWidth="200.0" promptText="Username" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray;" />
       <PasswordField fx:id="passwordField" layoutX="100.0" layoutY="172.0" prefHeight="0.0" prefWidth="200.0" promptText="Password" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray;" />
       <Label fx:id="labelError" layoutX="100.0" layoutY="239.0" prefHeight="38.0" prefWidth="200.0" style="-fx-visibility: no;" text=" " textFill="RED" />
       <CheckBox fx:id="checkBox" layoutX="190.0" layoutY="207.0" mnemonicParsing="false" onAction="#handleCheckBox" text="Show password" textFill="WHITE" />
@@ -25,5 +27,10 @@
          </font>
       </Button>
       <TextField fx:id="textFieldPassword" layoutX="100.0" layoutY="172.0" prefHeight="0.0" prefWidth="200.0" promptText="Password" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray;" />
+      <ImageView fitHeight="186.0" fitWidth="269.0" layoutX="65.0" layoutY="-14.0">
+         <image>
+            <Image url="@../imgs/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
