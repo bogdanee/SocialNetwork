@@ -17,8 +17,10 @@ import javafx.scene.paint.Color;
 import service.Service;
 
 import javafx.util.Callback;
+import utils.RequestStatus;
 import utils.UsersStatus;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -87,7 +89,6 @@ public class MainController {
                         anchorPane.getChildren().add(respondRequest);
                         respondRequest.getChildren().add(acceptRequest);
                         respondRequest.getChildren().add(denyRequest);
-
                     }
 
                     @Override
@@ -126,6 +127,23 @@ public class MainController {
                                 labelAlreadyFriends.setVisible(false);
                                 respondRequest.setVisible(false);
                             }
+
+                            buttonAddFriend.setOnAction((ActionEvent event) -> {
+                                service.sendFriendRequest(user.getId(), item.getId(), LocalDateTime.now());
+                                buttonAddFriend.setVisible(false);
+                                buttonCancelRequest.setVisible(true);
+                            });
+                            buttonCancelRequest.setOnAction((ActionEvent event) -> {
+                                service.deleteRequest(user.getId(), item.getId());
+                                buttonAddFriend.setVisible(true);
+                                buttonCancelRequest.setVisible(false);
+                            });
+                            acceptRequest.setOnAction((ActionEvent event) -> {
+                                service.updateRequest(item.getId(), user.getId(), LocalDateTime.now(), RequestStatus.APPROVED.toString());
+                                respondRequest.setVisible(false);
+                                labelAlreadyFriends.setVisible(true);
+                                labelAlreadyFriends.setStyle("-fx-text-fill: white;");
+                            });
                             setGraphic(anchorPane);
                         }
                     }

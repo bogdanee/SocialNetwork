@@ -97,6 +97,11 @@ public class Service {
         userRequest.forEach(x -> requestRepo.delete(x.getId1(), x.getId2()));
     }
 
+    public void deleteRequest(int idSender, int idReceiver)
+    {
+        requestRepo.delete(idSender, idReceiver);
+    }
+
     /**
      * Add a user into userRepository
      * @param firstName - String
