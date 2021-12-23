@@ -5,8 +5,8 @@ plugins {
     id 'org.beryx.jlink' version '2.24.1'
 }
 
-group 'com.example'
 version '1.0-SNAPSHOT'
+group('com.example')
 
 repositories {
     mavenCentral()
@@ -40,9 +40,11 @@ dependencies {
     }
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
     implementation 'org.postgresql:postgresql:42.3.1'
+    implementation 'com.jfoenix:jfoenix:9.0.10'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
 }
 
 test {
