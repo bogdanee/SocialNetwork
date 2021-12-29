@@ -1,21 +1,21 @@
 package controller;
 
 import domain.User;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import service.Service;
 import javafx.fxml.FXML;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import window.MainWindow;
+import window.SearchWindow;
 import window.RegisterWindow;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class LoginController {
 
     private Service service;
+    String password;
 
     @FXML
     TextField textFieldUsername;
@@ -39,17 +39,28 @@ public class LoginController {
     @FXML
     CheckBox checkBox;
 
+    @FXML
+    public void initialize() throws IOException {
 
+        passwordField.textProperty().addListener((observable, oldValue, newValue) -> {
+            password = newValue;
+        });
+
+        textFieldPassword.textProperty().addListener((observable, oldValue, newValue) -> {
+            password = newValue;
+        });
+    }
 
     public void handleRegister() throws Exception {
         Stage newWindow = (Stage) buttonRegister.getScene().getWindow();
         RegisterWindow register = new RegisterWindow();
         register.start(newWindow);
+
+
     }
 
     public void handleLogin() throws Exception {
-        String username = textFieldUsername.getText().toString();
-        String password = passwordField.getText().toString();
+        String username = textFieldUsername.getText();
         User user = service.findUserByUsername(username);
         if (user == null)
         {
@@ -63,7 +74,7 @@ public class LoginController {
         {
             labelError.setText("");
             Stage newWindow = (Stage) buttonLogin.getScene().getWindow();
-            MainWindow main = new MainWindow();
+            SearchWindow main = new SearchWindow();
             main.setUser(user);
             main.start(newWindow);
         }
@@ -73,14 +84,14 @@ public class LoginController {
     {
         if (!checkBox.isSelected())
         {
-            passwordField.setText(textFieldPassword.getText());
+            passwordField.setText(password);
             textFieldPassword.setVisible(false);
             passwordField.setVisible(true);
 
         }
         else
         {
-            textFieldPassword.setText(passwordField.getText());
+            textFieldPassword.setText(password);
             textFieldPassword.setVisible(true);
             passwordField.setVisible(false);
         }

@@ -21,25 +21,25 @@
             <VBox layoutY="130.0" prefHeight="265.0" prefWidth="220.0">
                <children>
                   <Separator opacity="0.2" prefWidth="220.0" />
-                  <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Button" textAlignment="RIGHT">
+                  <Button fx:id="buttonProfile" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#handleProfile" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Profile" textAlignment="RIGHT">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                   <Separator opacity="0.2" prefWidth="220.0" />
-                  <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Button" textAlignment="RIGHT">
+                  <Button fx:id="buttonSearch" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#handleSearch" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Search" textAlignment="RIGHT">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                   <Separator opacity="0.2" prefWidth="220.0" />
-                  <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text=" Button" textAlignment="RIGHT">
+                  <Button fx:id="buttonFriends" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#handleFriends" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Friends" textAlignment="RIGHT">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
                   <Separator opacity="0.2" prefWidth="220.0" />
-                  <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text=" Button" textAlignment="RIGHT">
+                  <Button alignment="TOP_CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Events" textAlignment="RIGHT">
                      <font>
                         <Font size="18.0" />
                      </font>

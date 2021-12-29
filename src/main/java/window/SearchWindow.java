@@ -1,42 +1,33 @@
 package window;
 
 import com.jfoenix.assets.JFoenixResources;
-import controller.MainController;
-import controller.NavDrawerController;
-import controller.RegisterController;
+import controller.SearchController;
 import domain.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import main.Main;
 
-public class MainWindow  extends Application {
+public class SearchWindow extends Application {
+    private final int width = 550;
+    private final int height = 400;
 
     private User user;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader=new FXMLLoader();
-        loader.setLocation(MainWindow.class.getResource("/fxml/mainView.fxml"));
+        loader.setLocation(SearchWindow.class.getResource("/fxml/searchView.fxml"));
 
         BorderPane root=loader.load();
 
-        MainController controller=loader.getController();
+        SearchController controller=loader.getController();
         controller.setService(Main.getService());
         controller.setUser(user);
 
-        Scene scene = new Scene(root , 700, 400);
+        Scene scene = new Scene(root , width, height);
         scene.getStylesheets().add(JFoenixResources.load("/css/hamburger.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.setTitle("¯\\_(ツ)_/¯");

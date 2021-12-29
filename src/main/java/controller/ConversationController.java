@@ -1,2 +1,4 @@
-package controller;public class ConversationController {
+package controller;
+
+public class ConversationController {
 }
