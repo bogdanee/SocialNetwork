@@ -9,14 +9,14 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 
-<BorderPane maxHeight="790.0" maxWidth="1280.0" prefHeight="790.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+<BorderPane maxHeight="790.0" maxWidth="1280.0" prefHeight="790.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SearchController">
    <center>
    <AnchorPane opacity="0.8" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" >
       <children>
          <JFXHamburger fx:id="hamburger" layoutX="14.0" layoutY="14.0" prefWidth="35" prefHeight="35"  onMouseClicked="#handleHamburger"/>
-         <Button fx:id="buttonSearch" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="33.0" prefWidth="66.0" style="-fx-background-color: #248cf0;" text="Search" textFill="WHITE" />
-         <TextField fx:id="textFieldSearch" layoutX="192.0" layoutY="14.0" prefHeight="34.0" prefWidth="341.0" promptText="Aa" />
-         <ListView fx:id="listView" layoutX="192.0" layoutY="48.0" prefHeight="200.0" prefWidth="406.0" style="-fx-background-color: black;" />
+         <Button fx:id="buttonSearch" layoutX="402.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="33.0" prefWidth="66.0" style="-fx-background-color: #248cf0;" text="Search" textFill="WHITE" />
+         <TextField fx:id="textFieldSearch" layoutX="60" layoutY="14.0" prefHeight="34.0" prefWidth="341.0" promptText="Aa" onAction="#handleSearch" />
+         <ListView fx:id="listView" layoutX="60" layoutY="48.0" prefHeight="200.0" prefWidth="406.0" style="-fx-background-color: black;" />
       </children>
    </AnchorPane>
    </center>

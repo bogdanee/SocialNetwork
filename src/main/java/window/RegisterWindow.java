@@ -10,6 +10,8 @@ import main.Main;
 import service.Service;
 
 public class RegisterWindow extends Application {
+    private final int width = 400;
+    private final int height = 400;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -20,7 +22,7 @@ public class RegisterWindow extends Application {
 
         RegisterController controller=loader.getController();
         controller.setService(Main.getService());
-        primaryStage.setScene(new Scene(root , 400, 400));
+        primaryStage.setScene(new Scene(root , width, height));
         primaryStage.setTitle("Register");
         primaryStage.show();
 

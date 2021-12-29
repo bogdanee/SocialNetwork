@@ -124,7 +124,7 @@ public class Service {
      */
     public void deleteUser(int id)
     {
-        User user = new User("Aa", "Bb", "Cc", "Dd");
+        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd");
         user.setId(id);
         userVali.validate(user);
         userRepo.delete(user);
@@ -142,7 +142,7 @@ public class Service {
      */
     public User findUser(int id)
     {
-        User user = new User("Aa", "Bb", "Cc", "Dd");
+        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd");
         user.setId(id);
         userVali.validate(user);
         return userRepo.find(id);
@@ -163,7 +163,7 @@ public class Service {
      */
     public void updateUser(int id, String firstName, String lastName)
     {
-        User user = new User("Aa", "Bb", "Cc", "Dd");
+        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd");
         user.setId(id);
         userVali.validate(user);
         userRepo.update(user);

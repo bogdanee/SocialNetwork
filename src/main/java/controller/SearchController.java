@@ -7,21 +7,24 @@ import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import domain.User;
 import domain.UserDTO;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import main.Main;
 import service.Service;
 import utils.RequestStatus;
 import utils.UsersStatus;
-import window.MainWindow;
+import window.ConversationWindow;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -30,12 +33,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class MainController {
+public class SearchController extends MainController {
     ObservableList<UserDTO> modelUser = FXCollections.observableArrayList();
-    private Service service;
-    private NavDrawerController navDrawerController;
-
-    private User user;
+    List<UserDTO> userDTOList;
 
     @FXML
     TextField textFieldSearch;
@@ -46,50 +46,17 @@ public class MainController {
     @FXML
     ListView<UserDTO> listView;
 
-    @FXML
-    private JFXHamburger hamburger;
 
-    @FXML
-    private JFXDrawer drawer;
 
     @FXML
     public void initialize() throws IOException {
         listView.setItems(modelUser);
         setSearch();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/navDrawerView.fxml"));
-        VBox box = loader.load();
-        navDrawerController =  loader.getController();
-        drawer.setSidePane(box);
-        drawer.setMinWidth(0);
-
-        box.setStyle("-fx-opacity: 0.8; -fx-background-color: black");
-
-        HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(hamburger);
-        task.setRate(-1);
-
-        drawer.setOnDrawerOpening((event) -> {
-            task.setRate(task.getRate() * -1);
-            task.play();
-            drawer.setMinWidth(220);
-        });
-        drawer.setOnDrawerClosed((event) -> {
-            task.setRate(task.getRate() * -1);
-            task.play();
-            drawer.setMinWidth(0);
-        });
-    }
-
-    public void handleHamburger()
-    {
-        drawer.toggle();
-        navDrawerController.setLabelName(user.getLastName() + " " + user.getFirstName());
+        super.setDrawer();
     }
 
     private void setSearch()
     {
-
         var cellFactory = new Callback<ListView<UserDTO>, ListCell<UserDTO>>() {
             @Override
             public ListCell<UserDTO> call(ListView<UserDTO> param) {
@@ -99,6 +66,7 @@ public class MainController {
                     private final Button buttonAddFriend = new Button("Add friend");
                     private final Button buttonCancelRequest = new Button ("Cancel request");
                     private final Button buttonFriends = new Button("Friends!");
+                    private final Button buttonMessage = new Button("Message");
 
                     private final HBox buttonsAcceptDeny = new HBox();
                     private final Button buttonAccept = new Button("Accept");
@@ -113,6 +81,7 @@ public class MainController {
                         buttonAccept.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
                         buttonDeny.setStyle("-fx-background-color: white; -fx-text-fill: black;");
                         buttonFriends.setStyle("-fx-background-color: #1a1a1a;   -fx-text-fill: white;");
+                        buttonMessage.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
 
                         anchorPane.getChildren().add(labelName);
 
@@ -124,6 +93,9 @@ public class MainController {
 
                         AnchorPane.setRightAnchor(buttonFriends, 1d);
                         anchorPane.getChildren().add(buttonFriends);
+
+                        AnchorPane.setRightAnchor(buttonMessage, 150d);
+                        anchorPane.getChildren().add(buttonMessage);
 
                         AnchorPane.setRightAnchor(buttonsAcceptDeny, 1d);
                         anchorPane.getChildren().add(buttonsAcceptDeny);
@@ -186,6 +158,19 @@ public class MainController {
                                 buttonsAcceptDeny.setVisible(false);
                                 buttonFriends.setVisible(true);
                             });
+                            buttonDeny.setOnAction((ActionEvent event) -> {
+                                service.deleteRequest(item.getId(), user.getId());
+                                item.setStatus(UsersStatus.REJECTED.toString());
+                                buttonsAcceptDeny.setVisible(false);
+                                buttonAddFriend.setVisible(true);
+                            });
+                            buttonMessage.setOnAction((ActionEvent event) -> {
+                                try {
+                                    showConversation(user, service.findUser(item.getId()));
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
+                            });
                             setGraphic(anchorPane);
                         }
                     }
@@ -214,12 +199,23 @@ public class MainController {
 
     }
 
+    private void showConversation(User sender, User receiver) throws Exception {
+        Stage newWindow = new Stage();
+        ConversationWindow conversationWindow = new ConversationWindow();
+        conversationWindow.setSender(sender);
+        conversationWindow.setReceiver(receiver);
+        conversationWindow.setService(service);
+        conversationWindow.start(newWindow);
+    }
+
     public void setService(Service service)
     {
         this.service = service;
+        navDrawerController.setUser(user);
     }
 
     public void setUser(User user) throws IOException {
         this.user = user;
+        navDrawerController.setUser(user);
     }
 }

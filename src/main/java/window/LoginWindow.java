@@ -21,8 +21,12 @@ import main.Main;
 import service.Service;
 
 import java.net.URL;
+import java.util.Objects;
 
 public class LoginWindow extends Application {
+    private final int width = 400;
+    private final int height = 400;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -32,9 +36,10 @@ public class LoginWindow extends Application {
         AnchorPane root=loader.load();
 
         LoginController controller=loader.getController();
-
         controller.setService(Main.getService());
-        primaryStage.setScene(new Scene(root, 400, 400));
+
+        Scene scene = new Scene(root, width, height);
+        primaryStage.setScene(scene);
         primaryStage.setTitle("Application");
         primaryStage.getIcons().add(new Image("/imgs/icon.png"));
         primaryStage.show();

@@ -2,39 +2,63 @@ package controller;
 
 import domain.User;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import service.Service;
+import window.FriendsWindow;
 import window.LoginWindow;
-import window.MainWindow;
-
-import java.io.IOException;
-import java.util.Objects;
+import window.SearchWindow;
 
 
 public class NavDrawerController {
-
+    private Service service;
     private User user;
 
     @FXML
     Label labelName;
 
     @FXML
+    Button buttonSearch;
+
+    @FXML
+    Button buttonFriends;
+
+    @FXML
     Button buttonLogout;
 
     @FXML
     public void initialize() {
+    }
+
+    public void handleProfile()
+    {
+    }
+
+    public void handleSearch() throws Exception
+    {
+        Stage currentStage = (Stage) buttonLogout.getScene().getWindow();
+        SearchWindow searchWindow = new SearchWindow();
+        searchWindow.setUser(user);
+        searchWindow.start(currentStage);
+    }
+
+    public void handleFriends() throws Exception
+    {
+        Stage currentStage = (Stage) buttonLogout.getScene().getWindow();
+        FriendsWindow friendsWindow = new FriendsWindow();
+        friendsWindow.setUser(user);
+        friendsWindow.start(currentStage);
 
     }
 
     public void handleLogout() throws Exception {
-        Stage newWindow = (Stage) buttonLogout.getScene().getWindow();
-        LoginWindow login = new LoginWindow();
-
-
-        login.start(newWindow);
+        Stage currentStage = (Stage) buttonLogout.getScene().getWindow();
+        LoginWindow loginWindow = new LoginWindow();
+        loginWindow.start(currentStage);
     }
+
+    public void setService(Service service){ this.service = service; }
 
     public void setUser(User user) {
         this.user = user;

@@ -3,9 +3,4 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="17" />
   </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="com.example.SocialNetwork.main" options="--add-exports jdk.hotspot.agent/com.sun.java.swing.ui=com.example.SocialNetwork.main" />
-    </option>
-  </component>
 </project>
