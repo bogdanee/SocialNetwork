@@ -2,30 +2,24 @@ package window;
 
 import controller.LoginController;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import main.Main;
-import service.Service;
 
+import java.io.File;
 import java.net.URL;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static utils.Constants.LOGIN_SIZE;
 
 public class LoginWindow extends Application {
-    private final int width = 400;
-    private final int height = 400;
 
 
     @Override
@@ -38,8 +32,10 @@ public class LoginWindow extends Application {
         LoginController controller=loader.getController();
         controller.setService(Main.getService());
 
-        Scene scene = new Scene(root, width, height);
+        Scene scene = new Scene(root, LOGIN_SIZE, LOGIN_SIZE);
+
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Application");
         primaryStage.getIcons().add(new Image("/imgs/icon.png"));
         primaryStage.show();

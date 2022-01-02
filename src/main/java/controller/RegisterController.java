@@ -72,7 +72,7 @@ public class RegisterController {
         catch (ValidationException ve)
         {
             resetLabels();
-            String error = ve.getMessage().toString();
+            String error = ve.getMessage();
             if (error.contains(ERROR_CODE_INVALID_FN))
                 labelErrorFirstName.setText("First name must only contain letters");
             if (error.contains(ERROR_CODE_INVALID_LN))

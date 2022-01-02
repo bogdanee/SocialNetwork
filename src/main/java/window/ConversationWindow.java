@@ -9,9 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import service.Service;
 
+import static utils.Constants.APPLICATION_HEIGHT;
+import static utils.Constants.APPLICATION_WIDTH;
+
 public class ConversationWindow extends Application {
-    private final int width = 400;
-    private final int height = 400;
 
     private Service service;
     private User sender;
@@ -28,7 +29,8 @@ public class ConversationWindow extends Application {
         //ConversationWindow controller = loader.getController();
 
 
-        Scene scene = new Scene(root , width, height);
+        Scene scene = new Scene(root , APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.setTitle("¯\\_(ツ)_/¯");
         primaryStage.show();

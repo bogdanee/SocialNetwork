@@ -6,6 +6,7 @@ import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import domain.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import service.Service;
 
@@ -26,7 +27,8 @@ public class MainController {
     public void handleHamburger()
     {
         drawer.toggle();
-        navDrawerController.setLabelName(user.getLastName() + " " + user.getFirstName());
+        navDrawerController.setLabelName("Welcome,\n" + user.getLastName() + " " + user.getFirstName() + "!");
+        navDrawerController.imageUser.setImage(new Image(user.getImageURL()));
     }
 
     protected void setDrawer() throws IOException {
@@ -34,8 +36,10 @@ public class MainController {
         loader.setLocation(getClass().getResource("/fxml/navDrawerView.fxml"));
         VBox box = loader.load();
         navDrawerController =  loader.getController();
+
         drawer.setSidePane(box);
         drawer.setMinWidth(0);
+
 
         box.setStyle("-fx-opacity: 0.8; -fx-background-color: black");
 

@@ -5,10 +5,12 @@ import exception.RepositoryException;
 import exception.ServiceException;
 import exception.ValidationException;
 import graph.Graph;
+import javafx.scene.image.ImageView;
 import repository.database.MessageDbRepository;
 import repository.database.RequestDbRepository;
 import repository.memory.FriendshipRepository;
 import repository.memory.UserRepository;
+import utils.Constants;
 import utils.RequestStatus;
 import utils.UsersStatus;
 import validator.FriendshipValidator;
@@ -109,9 +111,8 @@ public class Service {
      * @throws ValidationException if params are not valid
      * @throws RepositoryException if new user already exist
      */
-    public void addUser(String firstName, String lastName, String username, String password) throws SQLException
-    {
-        User user = new User(firstName, lastName, username, password);
+    public void addUser(String firstName, String lastName, String username, String password) throws SQLException {
+        User user = new User(firstName, lastName, username, password, Constants.imageAvatar);
         userVali.validate(user);
         userRepo.add(user);
     }
@@ -124,7 +125,7 @@ public class Service {
      */
     public void deleteUser(int id)
     {
-        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd");
+        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd", Constants.imageAvatar);
         user.setId(id);
         userVali.validate(user);
         userRepo.delete(user);
@@ -142,7 +143,7 @@ public class Service {
      */
     public User findUser(int id)
     {
-        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd");
+        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd", Constants.imageAvatar);
         user.setId(id);
         userVali.validate(user);
         return userRepo.find(id);
@@ -155,16 +156,15 @@ public class Service {
 
     /**
      * Update a user from userRepository
-     * @param id - integer
      * @param firstName - String
      * @param lastName - String
      * @throws ValidationException if params are not valid
      * @throws RepositoryException if user doesn't exist
      */
-    public void updateUser(int id, String firstName, String lastName)
+    public void updateUser(String firstName, String lastName, String username, String password, String imageURL)
     {
-        User user = new User("Aa", "Bb", "Cccccccc", "Dddddddd");
-        user.setId(id);
+        User user = new User(firstName, lastName,username, password, imageURL);
+        user.setId(userRepo.findByUsername(username).getId());
         userVali.validate(user);
         userRepo.update(user);
     }

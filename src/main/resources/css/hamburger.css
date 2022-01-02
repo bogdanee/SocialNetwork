@@ -5,3 +5,7 @@
 .jfx-hamburger StackPane {
     -fx-background-color: #248cf0;
 }
+
+.jfx-drawer {
+    -fx-background-color: #333333;
+}

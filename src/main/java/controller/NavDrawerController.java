@@ -4,10 +4,12 @@ import domain.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import service.Service;
 import window.FriendsWindow;
 import window.LoginWindow;
+import window.ProfileWindow;
 import window.SearchWindow;
 
 
@@ -17,6 +19,12 @@ public class NavDrawerController {
 
     @FXML
     Label labelName;
+
+    @FXML
+    ImageView imageUser;
+
+    @FXML
+    Button buttonProfile;
 
     @FXML
     Button buttonSearch;
@@ -31,8 +39,11 @@ public class NavDrawerController {
     public void initialize() {
     }
 
-    public void handleProfile()
-    {
+    public void handleProfile() throws Exception {
+        Stage currentStage = (Stage) buttonProfile.getScene().getWindow();
+        ProfileWindow profileWindow = new ProfileWindow();
+        profileWindow.setUser(user);
+        profileWindow.start(currentStage);
     }
 
     public void handleSearch() throws Exception
