@@ -1,26 +1,16 @@
 package controller;
 
-import com.jfoenix.controls.JFXHamburger;
-import com.jfoenix.controls.JFXDrawer;
-
-import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import domain.User;
 import domain.UserDTO;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import main.Main;
 import service.Service;
 import utils.RequestStatus;
 import utils.UsersStatus;
@@ -34,8 +24,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SearchController extends MainController {
-    ObservableList<UserDTO> modelUser = FXCollections.observableArrayList();
-    List<UserDTO> userDTOList;
+    ObservableList<UserDTO> usersList = FXCollections.observableArrayList();
 
     @FXML
     TextField textFieldSearch;
@@ -50,7 +39,7 @@ public class SearchController extends MainController {
 
     @FXML
     public void initialize() throws IOException {
-        listView.setItems(modelUser);
+        listView.setItems(usersList);
         setSearch();
         super.setDrawer();
     }
@@ -110,8 +99,8 @@ public class SearchController extends MainController {
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            System.out.println(user.getId() + " " + item.getId() + " " + item.getStatus());
                             labelName.setText(item.getName());
+
                             if (Objects.equals(item.getStatus(), UsersStatus.FRIENDS.toString()))
                             {
                                 buttonAddFriend.setVisible(false);
@@ -185,7 +174,7 @@ public class SearchController extends MainController {
     {
         return service.getAllUsers().stream()
                 .filter(u -> u.getId() != user.getId())
-                .map(u -> new UserDTO(u.getId(), u.getLastName() + " " + u.getFirstName(), service.getStatus(user, u)))
+                .map(u -> new UserDTO(u.getId(), u.getLastName() + " " + u.getFirstName(), service.getStatus(user, u), u.getImageURL()))
                 .collect(Collectors.toList());
     }
 
@@ -194,7 +183,7 @@ public class SearchController extends MainController {
         var usersList = getUserDTOList().stream()
                 .filter(u -> u.getName().toLowerCase(Locale.ROOT).contains(textFieldSearch.getText().toLowerCase(Locale.ROOT)))
                 .collect(Collectors.toList());
-        modelUser.setAll(usersList);
+        this.usersList.setAll(usersList);
         listView.setVisible(!usersList.isEmpty());
 
     }
@@ -206,16 +195,5 @@ public class SearchController extends MainController {
         conversationWindow.setReceiver(receiver);
         conversationWindow.setService(service);
         conversationWindow.start(newWindow);
-    }
-
-    public void setService(Service service)
-    {
-        this.service = service;
-        navDrawerController.setUser(user);
-    }
-
-    public void setUser(User user) throws IOException {
-        this.user = user;
-        navDrawerController.setUser(user);
     }
 }

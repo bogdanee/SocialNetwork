@@ -26,14 +26,14 @@ public class UserDbRepository extends UserRepository {
     @Override
     public void add(User user) throws RepositoryException
     {
-        String sql = "insert into users (first_name, last_name, username, password) values (?, ?, ?, ?)";
+        String sql = "insert into users (first_name, last_name, username, password, image) values (?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getUsername());
             statement.setString(4, user.getPassword());
-
+            statement.setString(5, user.getImageURL());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -86,8 +86,9 @@ public class UserDbRepository extends UserRepository {
                 String lastName = resultSet.getString("last_name");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
+                String imageURL = resultSet.getString("image");
 
-                User user = new User(firstName, lastName, username, password);
+                User user = new User(firstName, lastName, username, password, imageURL);
                 user.setId(resultSet.getInt("id"));
                 return user;
             }
@@ -113,8 +114,9 @@ public class UserDbRepository extends UserRepository {
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
                 String password = resultSet.getString("password");
+                String imageURL = resultSet.getString("image");
 
-                User user = new User(firstName, lastName, usernameStr, password);
+                User user = new User(firstName, lastName, usernameStr, password, imageURL);
                 user.setId(resultSet.getInt("id"));
                 return user;
             }
@@ -137,13 +139,14 @@ public class UserDbRepository extends UserRepository {
         if (this.find(user.getId())  == null)
             throw new RepositoryException("user doesn't exist!");
         try (Connection connection = DriverManager.getConnection(url, username, password);
-             PreparedStatement statement = connection.prepareStatement("UPDATE users SET first_name=?, last_name=?, username=?, password=? WHERE id=?"))
+             PreparedStatement statement = connection.prepareStatement("UPDATE users SET first_name=?, last_name=?, username=?, password=?, image=? WHERE id=?"))
         {
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getUsername());
             statement.setString(4, user.getPassword());
-            statement.setInt(5, user.getId());
+            statement.setString(5, user.getImageURL());
+            statement.setInt(6, user.getId());
 
             statement.executeUpdate();
 
@@ -170,8 +173,9 @@ public class UserDbRepository extends UserRepository {
                 String lastName = resultSet.getString("last_name");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
+                String imageURL = resultSet.getString("image");
 
-                User user = new User(firstName, lastName, username, password);
+                User user = new User(firstName, lastName, username, password, imageURL);
                 user.setId(id);
                 users.add(user);
             }

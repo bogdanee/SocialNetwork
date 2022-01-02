@@ -11,10 +11,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.Main;
 
-public class FriendsWindow extends Application {
-    private final int width = 400;
-    private final int height = 400;
+import static utils.Constants.APPLICATION_HEIGHT;
+import static utils.Constants.APPLICATION_WIDTH;
 
+public class FriendsWindow extends Application {
     private User user;
 
     @Override
@@ -27,9 +27,12 @@ public class FriendsWindow extends Application {
         FriendsController controller=loader.getController();
         controller.setService(Main.getService());
         controller.setUser(user);
+        controller.showFriends();
+        controller.showRequests();
 
-        Scene scene = new Scene(root , width, height);
+        Scene scene = new Scene(root , APPLICATION_WIDTH, APPLICATION_HEIGHT);
         scene.getStylesheets().add(JFoenixResources.load("/css/hamburger.css").toExternalForm());
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.setTitle("¯\\_(ツ)_/¯");
         primaryStage.show();

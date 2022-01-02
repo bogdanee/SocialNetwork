@@ -4,12 +4,14 @@ public class UserDTO {
     private int id;
     private String name;
     private String status;
+    private String imageURL;
 
 
-    public UserDTO(int id, String name, String status) {
+    public UserDTO(int id, String name, String status, String imageURL) {
         this.id = id;
         this.name = name;
         this.status = status;
+        this.imageURL = imageURL;
     }
 
     public int getId() {
@@ -30,6 +32,14 @@ public class UserDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     @Override

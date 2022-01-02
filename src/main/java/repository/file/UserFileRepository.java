@@ -23,7 +23,7 @@ public class UserFileRepository extends UserRepository {
             String line;
             while((line = br.readLine())!=null){
                 List<String> attributes = Arrays.asList(line.split(";"));
-                User user = new User(attributes.get(0), attributes.get(1), attributes.get(2), attributes.get(3));
+                User user = new User(attributes.get(0), attributes.get(1), attributes.get(2), attributes.get(3), attributes.get(4));
                 super.add(user);
             }
         } catch (FileNotFoundException e) {

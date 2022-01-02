@@ -10,9 +10,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import main.Main;
 
+import static utils.Constants.APPLICATION_HEIGHT;
+import static utils.Constants.APPLICATION_WIDTH;
+
 public class SearchWindow extends Application {
-    private final int width = 550;
-    private final int height = 400;
 
     private User user;
 
@@ -27,12 +28,12 @@ public class SearchWindow extends Application {
         controller.setService(Main.getService());
         controller.setUser(user);
 
-        Scene scene = new Scene(root , width, height);
+        Scene scene = new Scene(root , APPLICATION_WIDTH, APPLICATION_HEIGHT);
         scene.getStylesheets().add(JFoenixResources.load("/css/hamburger.css").toExternalForm());
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.setTitle("¯\\_(ツ)_/¯");
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {

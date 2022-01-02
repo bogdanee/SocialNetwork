@@ -18,9 +18,9 @@ public class UserValidator implements Validator<User>{
             errorMessage += ERROR_CODE_INVALID_FN;
         if (!user.getLastName().matches("[a-zA-Z -]+"))
             errorMessage += ERROR_CODE_INVALID_LN;
-        if (user.getUsername().length()<8)
+        if (user.getUsername().length()<1)
             errorMessage += ERROR_CODE_INVALID_UN;
-        if (user.getPassword().length()<8)
+        if (user.getPassword().length()<1)
             errorMessage += ERROR_CODE_INVALID_P;
         if (!errorMessage.isEmpty())
             throw new ValidationException(errorMessage);
