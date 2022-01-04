@@ -1,11 +1,13 @@
 package window;
 
 import com.jfoenix.assets.JFoenixResources;
+import controller.ConversationController;
 import domain.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import service.Service;
 
@@ -18,18 +20,21 @@ public class ConversationWindow extends Application {
     private User sender;
     private User receiver;
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader=new FXMLLoader();
         loader.setLocation(SearchWindow.class.getResource("/fxml/conversationView.fxml"));
 
-        AnchorPane root=loader.load();
+        BorderPane root=loader.load();
 
-        //ConversationWindow controller = loader.getController();
-
+        ConversationController controller = loader.getController();
+        controller.setUser(sender);
+        controller.setReceiver(receiver);
+        controller.setService(service);
+        controller.showMessages();
 
         Scene scene = new Scene(root , APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        scene.getStylesheets().add(JFoenixResources.load("/css/hamburger.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.setTitle("¯\\_(ツ)_/¯");
