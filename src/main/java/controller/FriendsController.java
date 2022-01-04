@@ -198,12 +198,12 @@ public class FriendsController extends MainController {
     }
 
     private void showConversation(User sender, User receiver) throws Exception {
-        Stage newWindow = new Stage();
+        Stage curentStage = (Stage) listViewFriends.getScene().getWindow();
         ConversationWindow conversationWindow = new ConversationWindow();
         conversationWindow.setSender(sender);
         conversationWindow.setReceiver(receiver);
         conversationWindow.setService(service);
-        conversationWindow.start(newWindow);
+        conversationWindow.start(curentStage);
     }
 
     private List<UserDTO> getFriendsList()

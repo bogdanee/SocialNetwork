@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXDrawer?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConversationController">
-   <children>
-      <Label layoutX="236.0" layoutY="158.0" text="Bravo Coae">
-         <font>
-            <Font size="46.0" />
-         </font>
-      </Label>
-   </children>
-</AnchorPane>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<BorderPane prefHeight="420.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConversationController">
+   <center>
+      <AnchorPane opacity="0.8" prefHeight="401.0" prefWidth="620.0" style="-fx-background-color: black;" >
+         <children>
+            <JFXHamburger fx:id="hamburger" layoutX="14.0" layoutY="14.0" prefWidth="35" prefHeight="35" onMouseClicked="#handleHamburger"/>
+            <ImageView fx:id="imageReceiver" fitHeight="50.0" fitWidth="50.0" layoutX="163.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true"/>
+            <Label fx:id="labelReceiver" layoutX="225.0" layoutY="16.0" text="Friend name" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listViewMessages" layoutX="162.0" layoutY="69.0" prefHeight="275.0" prefWidth="306.0" style="-fx-background-color: black; -fx-border-color: gray; -fx-border-radius: 10;" />
+            <TextField fx:id="textFieldMessage" layoutX="162.0" layoutY="343.0" prefHeight="26.0" prefWidth="306.0" style="-fx-background-color: black; -fx-border-color: gray; -fx-border-radius: 7; -fx-text-inner-color: white; -fx-font-size: 15;" promptText="Aa" onAction="#handleMessage"/>
+            <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="443.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" />
+            <HBox fx:id="hBoxReply" layoutX="164.0" layoutY="380.0">
+               <Label fx:id="labelReply"  text="Reply" textFill="#ffffff" style="-fx-background-color: #313131; -fx-padding:5; -fx-background-radius: 5;"/>
+               <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="23.0" layoutY="226.0" onMouseClicked="#handleCancelReply">
+                  <image>
+                     <Image url="@../imgs/back.png" />
+                  </image>
+               </ImageView>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="220.0" prefWidth="0.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>
