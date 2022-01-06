@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -94,7 +93,7 @@ public class ConversationController extends MainController{
                             setGraphic(null);
                         } else {
                             Boolean isReply = false;
-                            if (item.getMessageToReply() != null) {
+                            if (item.getIdMessageToReply() != 0) {
                                 isReply = true;
                             }
                             if (item.getFrom() == sender.getId())
@@ -104,7 +103,7 @@ public class ConversationController extends MainController{
                                     labelMessageSenderReplied.setVisible(false);
                                 }
                                 else{
-                                    labelMessageSenderReplied.setText(item.getMessageToReply().getMessage());
+                                    labelMessageSenderReplied.setText(service.findMessage(item.getIdMessageToReply()).getMessage());
                                     labelMessageSenderReplied.setVisible(true);
                                 }
                                 labelMessageSender.setText(item.getMessage());
@@ -119,7 +118,7 @@ public class ConversationController extends MainController{
                                 }
                                 else
                                 {
-                                    labelMessageReceiverReplied.setText(item.getMessageToReply().getMessage());
+                                    labelMessageReceiverReplied.setText(service.findMessage(item.getIdMessageToReply()).getMessage());
                                     labelMessageReceiverReplied.setVisible(true);
                                 }
                                 labelMessageReceiver.setText(item.getMessage());
@@ -152,6 +151,7 @@ public class ConversationController extends MainController{
         String message = textFieldMessage.getText();
         List<Integer> receivers = new ArrayList<>();
         receivers.add(receiver.getId());
+
         if (!message.isEmpty())
             service.addMessage(sender.getId(), receivers, message, LocalDateTime.now(), idMessageReply);
 
@@ -177,7 +177,6 @@ public class ConversationController extends MainController{
     public void showMessages() {
         messagesList.setAll(getMessagesList());
         //listViewMessages.scrollTo(listViewMessages.getItems().size() - 1);
-
     }
 
 

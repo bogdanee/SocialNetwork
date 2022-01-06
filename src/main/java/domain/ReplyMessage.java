@@ -4,11 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ReplyMessage extends Message{
-    private Message messageToReply;
+    private int idMessageToReply;
 
-    public ReplyMessage(int from, List<Integer> to, String message, LocalDateTime date, Message messageToReply) {
+    public ReplyMessage(int from, List<Integer> to, String message, LocalDateTime date, int idMessageToReply) {
         super(from, to, message, date);
-        this.messageToReply = messageToReply;
+        this.idMessageToReply = idMessageToReply;
     }
 
     @Override
@@ -18,15 +18,15 @@ public class ReplyMessage extends Message{
                 ", to=" + to +
                 ", message='" + message + '\'' +
                 ", date=" + date +
-                ", messageToReply=" + messageToReply +
+                ", messageToReply=" + idMessageToReply +
                 '}';
     }
 
-    public Message getMessageToReply() {
-        return messageToReply;
+    public int getIdMessageToReply() {
+        return idMessageToReply;
     }
 
-    public void setMessageToReply(Message messageToReply) {
-        this.messageToReply = messageToReply;
+    public void setIdMessageToReply(int idMessageToReply) {
+        this.idMessageToReply = idMessageToReply;
     }
 }

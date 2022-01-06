@@ -48,8 +48,8 @@ public class MessageDbRepository {
             statement.setString(2, this.parseListToString(replyMessage.getTo()));
             statement.setString(3, replyMessage.getMessage());
             statement.setTimestamp(4, Timestamp.valueOf(replyMessage.getDate()));
-            if (replyMessage.getMessageToReply() != null)
-                statement.setInt(5, (int) replyMessage.getMessageToReply().getId());
+            if (replyMessage.getIdMessageToReply() != 0)
+                statement.setInt(5, (int) replyMessage.getIdMessageToReply());
             else
                 statement.setObject(5, null);
 
@@ -90,7 +90,7 @@ public class MessageDbRepository {
             String message = resultSet.getString("message");
             LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
             int idMessageToReply = resultSet.getInt("id_message_replied");
-            ReplyMessage msg = new ReplyMessage(user_id, friendsList, message, date, this.find(idMessageToReply));
+            ReplyMessage msg = new ReplyMessage(user_id, friendsList, message, date, idMessageToReply);
             msg.setId(resultSet.getInt("id"));
             return msg;
         }catch (SQLException e) {

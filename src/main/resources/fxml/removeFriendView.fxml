@@ -6,19 +6,19 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane fx:id="buttonYes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="120.0" prefWidth="254.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.8" prefHeight="120.0" prefWidth="254.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RemoveFriendController">
    <children>
-      <Button fx:id="buttonNo" layoutX="153.0" layoutY="73.0" mnemonicParsing="false" text="No">
+      <Button fx:id="buttonNo" layoutX="153.0" layoutY="73.0" mnemonicParsing="false" text="No" onAction="#handleNo">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button layoutX="57.0" layoutY="73.0" mnemonicParsing="false" text="Yes">
+      <Button fx:id="buttonYes" layoutX="57.0" layoutY="73.0" mnemonicParsing="false" text="Yes" onAction="#handleYes">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Label fx:id="labelMessage" layoutX="21.0" layoutY="23.0" style="-fx-text-fill: white;" text="Label">
+      <Label fx:id="labelMessage" layoutX="21.0" layoutY="14.0" style="-fx-text-fill: white;" text="Label">
          <font>
             <Font size="15.0" />
          </font>

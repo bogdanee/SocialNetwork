@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import utils.Constants;
 import utils.RequestStatus;
 import utils.UsersStatus;
 import window.ConversationWindow;
@@ -102,6 +104,7 @@ public class FriendsController extends MainController {
                                 } catch (Exception e) {
                                     System.out.println(e.getMessage());
                                 }
+
                             });
                             buttonRemoveFriend.setOnAction((ActionEvent event) ->{
                                 try {
@@ -127,6 +130,10 @@ public class FriendsController extends MainController {
         newWindow.initOwner(currentStage);
 
         RemoveFriendWindow removeFriendWindow = new RemoveFriendWindow();
+        removeFriendWindow.setUser(user);
+        System.out.println(service.findUser(friend.getId()));
+        removeFriendWindow.setFriend(service.findUser(friend.getId()));
+        removeFriendWindow.setService(service);
         removeFriendWindow.start(newWindow);
     }
 
@@ -140,6 +147,8 @@ public class FriendsController extends MainController {
                     private final ImageView image = new ImageView();
                     private final Label labelName = new Label();
 
+                    private final VBox vBox = new VBox();
+                    private final Label labelDate = new Label();
                     private final HBox hbox = new HBox();
                     private final Button buttonAccept = new Button("Accept");
                     private final Button buttonDeny = new Button("Deny");
@@ -147,9 +156,13 @@ public class FriendsController extends MainController {
                     {
                         this.setStyle("-fx-background-color: #000000; -fx-font-size:15;");
                         labelName.setStyle("-fx-text-fill: white; ");
+                        labelDate.setStyle("-fx-text-fill: white; -fx-font-size: 10;");
                         buttonAccept.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white; -fx-font-size: 10");
                         buttonDeny.setStyle("-fx-background-color:white; -fx-text-fill: black; -fx-font-size: 10");
-                        hbox.setSpacing(5);
+                        vBox.setSpacing(5d);
+                        vBox.setAlignment(Pos.CENTER);
+                        hbox.setSpacing(5d);
+
 
                         image.setFitWidth(35d);
                         image.setFitHeight(35d);
@@ -161,8 +174,9 @@ public class FriendsController extends MainController {
                         anchorPane.getChildren().add(labelName);
 
                         hbox.getChildren().addAll(buttonAccept, buttonDeny);
-                        AnchorPane.setRightAnchor(hbox, 1d);
-                        anchorPane.getChildren().add(hbox);
+                        vBox.getChildren().addAll(labelDate, hbox);
+                        AnchorPane.setRightAnchor(vBox, 1d);
+                        anchorPane.getChildren().add(vBox);
                     }
 
                     @Override
@@ -174,6 +188,9 @@ public class FriendsController extends MainController {
                         } else {
                             labelName.setText(item.getName());
                             image.setImage(new Image(item.getImageURL()));
+
+                            var dateRequest = service.findRequest(item.getId(), user.getId()).getDate().format(Constants.DATE_TIME_FORMATTER);
+                            labelDate.setText(dateRequest);
 
                             buttonAccept.setOnAction((ActionEvent event) -> {
                                 service.updateRequest(item.getId(), user.getId(), LocalDateTime.now(), RequestStatus.APPROVED.toString());
@@ -198,12 +215,14 @@ public class FriendsController extends MainController {
     }
 
     private void showConversation(User sender, User receiver) throws Exception {
-        Stage curentStage = (Stage) listViewFriends.getScene().getWindow();
+
+
+        Stage currentStage = (Stage) listViewFriends.getScene().getWindow();
         ConversationWindow conversationWindow = new ConversationWindow();
         conversationWindow.setSender(sender);
         conversationWindow.setReceiver(receiver);
         conversationWindow.setService(service);
-        conversationWindow.start(curentStage);
+        conversationWindow.start(currentStage);
     }
 
     private List<UserDTO> getFriendsList()
