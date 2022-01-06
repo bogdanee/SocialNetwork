@@ -5,7 +5,6 @@ import exception.RepositoryException;
 import exception.ServiceException;
 import exception.ValidationException;
 import graph.Graph;
-import javafx.scene.image.ImageView;
 import repository.database.MessageDbRepository;
 import repository.database.RequestDbRepository;
 import repository.memory.FriendshipRepository;
@@ -80,7 +79,7 @@ public class Service {
             if (listWithoutUser.isEmpty())
                 messageRepo.delete((int) x.getId());
             else {
-                var msg = new ReplyMessage(x.getFrom(), listWithoutUser, x.getMessage(), x.getDate(), x.getMessageToReply());
+                var msg = new ReplyMessage(x.getFrom(), listWithoutUser, x.getMessage(), x.getDate(), x.getIdMessageToReply());
                 msg.setId(x.getId());
                 messageRepo.update(msg);
             }
@@ -308,7 +307,7 @@ public class Service {
     {
         if (message.isEmpty())
             throw new ValidationException("message invalid!");
-        var msg = new ReplyMessage(idUser, idsFriends, message, date, messageRepo.find(idMessageToReply));
+        var msg = new ReplyMessage(idUser, idsFriends, message, date, idMessageToReply);
         messageRepo.add(msg);
     }
 
@@ -336,7 +335,7 @@ public class Service {
 
         return messages.stream()
                 .filter(esteOriNuIeste)
-                .sorted(Comparator.comparing(Message::getDate))
+                //.sorted(Comparator.comparing(Message::getDate))
                 .collect(Collectors.toList());
     }
 
@@ -365,6 +364,11 @@ public class Service {
             friendshipRepo.add(createFriendship(senderId, receiverId, date));
         }
         requestRepo.add(friendRequest);
+    }
+
+    public FriendRequest findRequest(int idSender, int idReceiver)
+    {
+        return requestRepo.find(idSender, idReceiver);
     }
 
     /**
