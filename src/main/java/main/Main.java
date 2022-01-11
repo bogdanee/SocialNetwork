@@ -1,9 +1,6 @@
 package main;
 
-import repository.database.FriendshipDbRepository;
-import repository.database.MessageDbRepository;
-import repository.database.RequestDbRepository;
-import repository.database.UserDbRepository;
+import repository.database.*;
 import repository.memory.FriendshipRepository;
 import repository.memory.UserRepository;
 import service.Service;
@@ -29,7 +26,8 @@ public class Main
         FriendshipRepository friendshipRepo = new FriendshipDbRepository(url, username, password);
         MessageDbRepository messageRepo = new MessageDbRepository(url, username, password);
         RequestDbRepository requestRepo = new RequestDbRepository(url, username, password);
-        service = new Service(userRepo,friendshipRepo, messageRepo, requestRepo, new UserValidator(), new FriendshipValidator());
+        EventDbRepository eventRepo = new EventDbRepository(url, username, password);
+        service = new Service(userRepo,friendshipRepo, messageRepo, requestRepo, eventRepo, new UserValidator(), new FriendshipValidator());
         LoginWindow loginWindow = new LoginWindow();
         loginWindow.main(args);
     }

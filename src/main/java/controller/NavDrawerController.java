@@ -7,10 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import service.Service;
-import window.FriendsWindow;
-import window.LoginWindow;
-import window.ProfileWindow;
-import window.SearchWindow;
+import window.*;
 
 
 public class NavDrawerController {
@@ -31,6 +28,9 @@ public class NavDrawerController {
 
     @FXML
     Button buttonFriends;
+
+    @FXML
+    Button buttonEvents;
 
     @FXML
     Button buttonLogout;
@@ -61,6 +61,14 @@ public class NavDrawerController {
         friendsWindow.setUser(user);
         friendsWindow.start(currentStage);
 
+    }
+
+    public void handleEvents() throws Exception
+    {
+        Stage currentStage = (Stage) buttonLogout.getScene().getWindow();
+        EventWindow eventWindow = new EventWindow();
+        eventWindow.setUser(user);
+        eventWindow.start(currentStage);
     }
 
     public void handleLogout() throws Exception {

@@ -7,6 +7,7 @@ import exception.ValidationException;
 import graph.Graph;
 import observer.Observable;
 import observer.Observer;
+import repository.database.EventDbRepository;
 import repository.database.MessageDbRepository;
 import repository.database.RequestDbRepository;
 import repository.memory.FriendshipRepository;
@@ -34,16 +35,18 @@ public class Service extends Observer {
     private final UserRepository userRepo;
     private final MessageDbRepository messageRepo;
     private final RequestDbRepository requestRepo;
+    private final EventDbRepository eventRepo;
     private final UserValidator userVali;
     private final FriendshipValidator friendshipVali;
 
 
     public Service(UserRepository userRepo,FriendshipRepository friendshipRepo,MessageDbRepository messageRepo,
-                   RequestDbRepository requestRepo, UserValidator userVali, FriendshipValidator friendshipVali) {
+                   RequestDbRepository requestRepo, EventDbRepository eventRepo, UserValidator userVali, FriendshipValidator friendshipVali) {
         this.userRepo = userRepo;
         this.friendshipRepo = friendshipRepo;
         this.messageRepo = messageRepo;
         this.requestRepo = requestRepo;
+        this.eventRepo = eventRepo;
         this.userVali = userVali;
         this.friendshipVali = friendshipVali;
     }
@@ -435,14 +438,42 @@ public class Service extends Observer {
         return UsersStatus.NOTFRIENDS.toString();
     }
 
-
     @Override
     public void notifyObservables() {
         this.observables.forEach(Observable::update);
     }
 
-    public void addObservable(Observable observable)
-    {
+    public void addObservable(Observable observable) {
         this.observables.add(observable);
     }
+
+    public List<Event> getAllEventsForUser(int idUser)
+    {
+        List<Event> events = eventRepo.getAll();
+        return events.stream()
+                .filter(x-> x.getParticipants().contains(idUser))
+                .collect(Collectors.toList());
+    }
+
+    public void deleteParticipant (int idEvent, int idUser)
+    {
+        Event event = eventRepo.find(idEvent);
+        eventRepo.delete(idEvent);
+        event.getParticipants().remove((Object) idUser);
+        eventRepo.add(event);
+    }
+
+    public void addParticipant (int idEvent, int idUser)
+    {
+        Event event = eventRepo.find(idEvent);
+        eventRepo.delete(idEvent);
+        event.getParticipants().add(idUser);
+        eventRepo.add(event);
+    }
+
+    public List<Event> getAllEvents()
+    {
+        return eventRepo.getAll();
+    }
+
 }
