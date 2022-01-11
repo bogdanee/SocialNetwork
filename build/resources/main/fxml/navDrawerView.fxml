@@ -39,7 +39,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button alignment="CENTER_RIGHT" layoutX="1.0" layoutY="310.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Events" textAlignment="RIGHT">
+            <Button fx:id="buttonEvents" alignment="CENTER_RIGHT" layoutX="1.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleEvents" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Events" textAlignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>
