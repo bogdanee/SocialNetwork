@@ -27,6 +27,7 @@ public class ConversationController extends MainController{
     private User receiver;
     private int idMessageReply;
 
+
     @FXML
     ListView listViewMessages;
 

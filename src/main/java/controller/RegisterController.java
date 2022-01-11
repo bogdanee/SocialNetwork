@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 import service.Service;
+import utils.HashingPassword;
 import window.LoginWindow;
 
 import java.sql.SQLException;
@@ -62,10 +63,10 @@ public class RegisterController {
     {
         try
         {
-            String lastName = textFieldLastName.getText().toString();
-            String firstName = textFieldFirstName.getText().toString();
-            String username = textFieldUsername.getText().toString();
-            String password = textFieldPassword.getText().toString();
+            String lastName = textFieldLastName.getText();
+            String firstName = textFieldFirstName.getText();
+            String username = textFieldUsername.getText();
+            String password = textFieldPassword.getText();
             service.addUser(firstName, lastName, username, password);
             this.handleReturn();
         }

@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import service.Service;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import utils.HashingPassword;
+import window.FriendsWindow;
 import window.SearchWindow;
 import window.RegisterWindow;
 
@@ -66,7 +68,7 @@ public class LoginController {
         {
             labelError.setText("Username doesn't exist!\nPlease register");
         }
-        else if (!Objects.equals(user.getPassword(), password))
+        else if (!Objects.equals(user.getPassword(), HashingPassword.hash(password)))
         {
             labelError.setText("Incorrect password");
         }
@@ -74,7 +76,7 @@ public class LoginController {
         {
             labelError.setText("");
             Stage newWindow = (Stage) buttonLogin.getScene().getWindow();
-            SearchWindow main = new SearchWindow();
+            FriendsWindow main = new FriendsWindow();
             main.setUser(user);
             main.start(newWindow);
         }

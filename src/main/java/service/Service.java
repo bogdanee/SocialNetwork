@@ -5,23 +5,31 @@ import exception.RepositoryException;
 import exception.ServiceException;
 import exception.ValidationException;
 import graph.Graph;
+import observer.Observable;
+import observer.Observer;
 import repository.database.MessageDbRepository;
 import repository.database.RequestDbRepository;
 import repository.memory.FriendshipRepository;
 import repository.memory.UserRepository;
 import utils.Constants;
+import utils.HashingPassword;
 import utils.RequestStatus;
 import utils.UsersStatus;
 import validator.FriendshipValidator;
 import validator.UserValidator;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class Service {
+public class Service extends Observer {
     private final FriendshipRepository friendshipRepo;
     private final UserRepository userRepo;
     private final MessageDbRepository messageRepo;
@@ -110,10 +118,17 @@ public class Service {
      * @throws ValidationException if params are not valid
      * @throws RepositoryException if new user already exist
      */
-    public void addUser(String firstName, String lastName, String username, String password) throws SQLException {
-        User user = new User(firstName, lastName, username, password, Constants.imageAvatar);
+    public void addUser(String firstName, String lastName, String username, String password) throws SQLException, NoSuchAlgorithmException {
+        User user = new User(firstName, lastName, username, HashingPassword.hash(password) , Constants.imageAvatar);
         userVali.validate(user);
         userRepo.add(user);
+        String userPass = "\n" + username + " " + password;
+        try {
+            Files.write(Paths.get("src/main/java/data/users.txt"), userPass.getBytes(), StandardOpenOption.APPEND);
+
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -418,5 +433,16 @@ public class Service {
                 return UsersStatus.REJECTED.toString();
         }
         return UsersStatus.NOTFRIENDS.toString();
+    }
+
+
+    @Override
+    public void notifyObservables() {
+        this.observables.forEach(Observable::update);
+    }
+
+    public void addObservable(Observable observable)
+    {
+        this.observables.add(observable);
     }
 }

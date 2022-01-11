@@ -35,6 +35,7 @@ public class ConversationWindow extends Application {
 
         Scene scene = new Scene(root , APPLICATION_WIDTH, APPLICATION_HEIGHT);
         scene.getStylesheets().add(JFoenixResources.load("/css/hamburger.css").toExternalForm());
+        scene.getStylesheets().add(String.valueOf(getClass().getResource("/css/conversation.css")));
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.setTitle("¯\\_(ツ)_/¯");
