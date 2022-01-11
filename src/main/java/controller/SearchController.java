@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -30,9 +32,6 @@ public class SearchController extends MainController {
     TextField textFieldSearch;
 
     @FXML
-    Button buttonSearch;
-
-    @FXML
     ListView<UserDTO> listView;
 
 
@@ -51,11 +50,11 @@ public class SearchController extends MainController {
             public ListCell<UserDTO> call(ListView<UserDTO> param) {
                 ListCell<UserDTO> cell = new ListCell<UserDTO>() {
                     private final AnchorPane anchorPane = new AnchorPane();
+                    private final ImageView image = new ImageView();
                     private final Label labelName = new Label();
                     private final Button buttonAddFriend = new Button("Add friend");
                     private final Button buttonCancelRequest = new Button ("Cancel request");
                     private final Button buttonFriends = new Button("Friends!");
-                    private final Button buttonMessage = new Button("Message");
 
                     private final HBox buttonsAcceptDeny = new HBox();
                     private final Button buttonAccept = new Button("Accept");
@@ -63,28 +62,36 @@ public class SearchController extends MainController {
 
 
                     {
-                        this.setStyle("-fx-background-color: #1a1a1a; -fx-font-size:13;");
+                        this.setStyle("-fx-background-color: #070707; -fx-font-size:13;");
                         labelName.setStyle("-fx-text-fill: white; ");
                         buttonAddFriend.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
-                        buttonCancelRequest.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
+                        buttonCancelRequest.setStyle("-fx-background-color:gray; -fx-text-fill: white;");
                         buttonAccept.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
                         buttonDeny.setStyle("-fx-background-color: white; -fx-text-fill: black;");
                         buttonFriends.setStyle("-fx-background-color: #1a1a1a;   -fx-text-fill: white;");
-                        buttonMessage.setStyle("-fx-background-color:#248CF0FF; -fx-text-fill: white;");
 
+                        image.setFitWidth(35d);
+                        image.setFitHeight(35d);
+
+                        AnchorPane.setTopAnchor(image, 3d);
+                        anchorPane.getChildren().add(image);
+
+                        AnchorPane.setLeftAnchor(labelName, 40d);
                         anchorPane.getChildren().add(labelName);
 
                         AnchorPane.setRightAnchor(buttonAddFriend, 1d);
+                        AnchorPane.setTopAnchor(buttonAddFriend, 5d);
                         anchorPane.getChildren().add(buttonAddFriend);
 
                         AnchorPane.setRightAnchor(buttonCancelRequest, 1d);
+                        AnchorPane.setTopAnchor(buttonCancelRequest, 5d);
                         anchorPane.getChildren().add(buttonCancelRequest);
 
+
                         AnchorPane.setRightAnchor(buttonFriends, 1d);
+                        AnchorPane.setTopAnchor(buttonFriends, 5d);
                         anchorPane.getChildren().add(buttonFriends);
 
-                        AnchorPane.setRightAnchor(buttonMessage, 150d);
-                        anchorPane.getChildren().add(buttonMessage);
 
                         AnchorPane.setRightAnchor(buttonsAcceptDeny, 1d);
                         anchorPane.getChildren().add(buttonsAcceptDeny);
@@ -100,6 +107,7 @@ public class SearchController extends MainController {
                             setGraphic(null);
                         } else {
                             labelName.setText(item.getName());
+                            image.setImage(new Image(item.getImageURL()));
 
                             if (Objects.equals(item.getStatus(), UsersStatus.FRIENDS.toString()))
                             {
@@ -152,13 +160,6 @@ public class SearchController extends MainController {
                                 item.setStatus(UsersStatus.REJECTED.toString());
                                 buttonsAcceptDeny.setVisible(false);
                                 buttonAddFriend.setVisible(true);
-                            });
-                            buttonMessage.setOnAction((ActionEvent event) -> {
-                                try {
-                                    showConversation(user, service.findUser(item.getId()));
-                                } catch (Exception e) {
-                                    System.out.println(e.getMessage());
-                                }
                             });
                             setGraphic(anchorPane);
                         }

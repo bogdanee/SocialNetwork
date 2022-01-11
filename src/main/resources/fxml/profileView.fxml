@@ -25,8 +25,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldLastName" layoutX="327.0" layoutY="78.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; " />
-            <TextField fx:id="textFieldFirstName" layoutX="327.0" layoutY="153.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; " />
+            <TextField fx:id="textFieldLastName" layoutX="327.0" layoutY="78.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; -fx-border-radius: 3; " />
+            <TextField fx:id="textFieldFirstName" layoutX="327.0" layoutY="153.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; -fx-border-radius: 3; " />
             <Button fx:id="buttonSave" layoutX="351.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="30.0" prefWidth="151.0" style="-fx-background-color: #248cf0;" text="SAVE CHANGES" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />

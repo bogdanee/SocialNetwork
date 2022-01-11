@@ -20,6 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import observer.Observable;
+import service.Service;
 import utils.Constants;
 import utils.RequestStatus;
 import utils.UsersStatus;
@@ -33,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FriendsController extends MainController {
+public class FriendsController extends MainController implements Observable {
     ObservableList<UserDTO> friendsList = FXCollections.observableArrayList();
     ObservableList<UserDTO> requestsList = FXCollections.observableArrayList();
 
@@ -269,4 +271,15 @@ public class FriendsController extends MainController {
         listViewRequests.setVisible(!requestsList.isEmpty());
     }
 
+    @Override
+    public void setService(Service service)
+    {
+        super.setService(service);
+        service.addObservable(this);
+    }
+
+    @Override
+    public void update() {
+        showFriends();
+    }
 }

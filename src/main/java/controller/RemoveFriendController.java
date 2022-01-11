@@ -4,6 +4,7 @@ import domain.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import observer.Observable;
 import service.Service;
 
 
@@ -24,15 +25,16 @@ public class RemoveFriendController {
 
     public void handleNo()
     {
-        Stage curentStage = (Stage) labelMessage.getScene().getWindow();
-        curentStage.close();
+        Stage currentStage = (Stage) labelMessage.getScene().getWindow();
+        currentStage.close();
     }
 
     public void handleYes()
     {
-        Stage curentStage = (Stage) labelMessage.getScene().getWindow();
+        Stage currentStage = (Stage) labelMessage.getScene().getWindow();
         service.deleteFriendship(user.getId(), friend.getId());
-        curentStage.close();
+        service.notifyObservables();
+        currentStage.close();
     }
 
     public void setUser(User user) {
