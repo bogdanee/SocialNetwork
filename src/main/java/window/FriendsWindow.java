@@ -31,6 +31,7 @@ public class FriendsWindow extends Application {
         controller.showRequests();
 
         Scene scene = new Scene(root , APPLICATION_WIDTH, APPLICATION_HEIGHT);
+
         scene.getStylesheets().add(JFoenixResources.load("/css/hamburger.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.setScene(scene);

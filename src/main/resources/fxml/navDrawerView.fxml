@@ -24,27 +24,27 @@
                </font>
             </Label>
             <ImageView fx:id="imageUser" fitHeight="46.0" fitWidth="46.0" layoutX="17.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true" />
-            <Button fx:id="buttonProfile" alignment="CENTER_RIGHT" layoutX="1.0" layoutY="175.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Profile" textAlignment="RIGHT">
+            <Button fx:id="buttonProfile" alignment="CENTER_RIGHT" stylesheets="/css/hamburger.css" styleClass="button-fade" layoutX="1.0" layoutY="175.0" mnemonicParsing="false" onAction="#handleProfile" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Profile" textAlignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="buttonSearch" alignment="CENTER_RIGHT" layoutX="1.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Search" textAlignment="RIGHT">
+            <Button fx:id="buttonSearch" alignment="CENTER_RIGHT" stylesheets="/css/hamburger.css" styleClass="button-fade" layoutX="1.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleSearch" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Search" textAlignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="buttonFriends" alignment="CENTER_RIGHT" layoutX="1.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleFriends" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Friends" textAlignment="RIGHT">
+            <Button fx:id="buttonFriends" alignment="CENTER_RIGHT" stylesheets="/css/hamburger.css" styleClass="button-fade" layoutX="1.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleFriends" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Friends" textAlignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="buttonEvents" alignment="CENTER_RIGHT" layoutX="1.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleEvents" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Events" textAlignment="RIGHT">
+            <Button fx:id="buttonEvents" alignment="CENTER_RIGHT" stylesheets="/css/hamburger.css" styleClass="button-fade" layoutX="1.0" layoutY="310.0" mnemonicParsing="false" onAction="#handleEvents" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Events" textAlignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="buttonLogout" alignment="CENTER_RIGHT" layoutY="355.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Logout" textAlignment="RIGHT">
+            <Button fx:id="buttonLogout" alignment="CENTER_RIGHT" stylesheets="/css/hamburger.css" styleClass="button-fade" layoutY="355.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: black; -fx-text-fill: white; ;" text="Logout" textAlignment="RIGHT">
                <font>
                   <Font size="18.0" />
                </font>
