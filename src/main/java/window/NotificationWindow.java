@@ -35,11 +35,14 @@ public class NotificationWindow extends Application {
         controller.setEvent(event);
 
 
+
+
         Scene scene = new Scene(root , NOTIFICATION_WIDTH,  NOTIFICATION_HEIGHT);
-        primaryStage.setX(RootXValue + APPLICATION_WIDTH - NOTIFICATION_WIDTH);
-        primaryStage.setY(RootYValue + APPLICATION_HEIGHT - NOTIFICATION_HEIGHT);
+        primaryStage.setX(RootXValue + APPLICATION_WIDTH - NOTIFICATION_WIDTH + 10);
+        primaryStage.setY(RootYValue + APPLICATION_HEIGHT - NOTIFICATION_HEIGHT + 30);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
+        primaryStage.setAlwaysOnTop(true);
         primaryStage.setScene(scene);
         primaryStage.setTitle("¯\\_(ツ)_/¯");
         primaryStage.show();

@@ -6,9 +6,9 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane opacity="0.9" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NotificationController">
+<AnchorPane opacity="0.85" prefHeight="100.0" prefWidth="300.0" style="-fx-background-color: black; -fx-border-radius: 5; -fx-border-color: gray;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NotificationController">
    <children>
-      <Button fx:id="buttonOk" layoutX="126.0" layoutY="66.0" mnemonicParsing="false" onAction="#handleOK" style="-fx-background-color: black;" text="OK" textFill="WHITE">
+      <Button fx:id="buttonOk" layoutX="126.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleOK" style="-fx-background-color: rgba(0,0,0,0);" text="OK" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
