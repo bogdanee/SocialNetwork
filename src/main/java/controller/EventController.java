@@ -14,12 +14,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import utils.Constants;
 import utils.RequestStatus;
 import utils.UsersStatus;
+import window.CreateEventWindow;
 import window.RemoveFriendWindow;
 
 import java.io.IOException;
@@ -49,7 +51,7 @@ public class EventController extends MainController{
     Label labelDateEvent;
 
     @FXML
-    Label labelDescription;
+    TextArea textAreaDescription;
 
     @FXML
     Button buttonSubscribe;
@@ -123,7 +125,8 @@ public class EventController extends MainController{
                                 User organiser = service.findUser(item.getOrganiser());
                                 labelOrganiser.setText("Organiser: " + organiser.getLastName() + " " + organiser.getFirstName());
                                 labelDateEvent.setText("Date: " + item.getDate().format(Constants.DATE_TIME_FORMATTER));
-                                labelDescription.setText("Description: " + item.getDescription());
+                                textAreaDescription.setText("Description: " + item.getDescription());
+                                textAreaDescription.setWrapText(true);
                                 showDetails();
                                 buttonSubscribe.setVisible(false);
                                 listViewSearch.setVisible(false);
@@ -158,7 +161,7 @@ public class EventController extends MainController{
         labelEventName.setVisible(false);
         labelOrganiser.setVisible(false);
         labelDateEvent.setVisible(false);
-        labelDescription.setVisible(false);
+        textAreaDescription.setVisible(false);
         buttonSubscribe.setVisible(false);
         buttonUnSubscribe.setVisible(false);
         listViewSearch.setVisible(false);
@@ -170,7 +173,7 @@ public class EventController extends MainController{
         labelEventName.setVisible(true);
         labelOrganiser.setVisible(true);
         labelDateEvent.setVisible(true);
-        labelDescription.setVisible(true);
+        textAreaDescription.setVisible(true);
         buttonSubscribe.setVisible(true);
         buttonUnSubscribe.setVisible(true);
     }
@@ -220,7 +223,8 @@ public class EventController extends MainController{
                                 User organiser = service.findUser(item.getOrganiser());
                                 labelOrganiser.setText("Organiser: " + organiser.getLastName() + " " + organiser.getFirstName());
                                 labelDateEvent.setText("Date: " + item.getDate().format(Constants.DATE_TIME_FORMATTER));
-                                labelDescription.setText("Description: " + item.getDescription());
+                                textAreaDescription.setText("Description: " + item.getDescription());
+                                textAreaDescription.setWrapText(true);
                                 showDetails();
 
                                 if (item.getParticipants().contains(user.getId()))
@@ -261,6 +265,7 @@ public class EventController extends MainController{
             service.addParticipant(item.getId(), user.getId());
             buttonSubscribe.setVisible(false);
             buttonUnSubscribe.setVisible(true);
+            showEvents();
         });
     }
 
@@ -273,19 +278,16 @@ public class EventController extends MainController{
         listViewSearch.setVisible(!eventsSearchList.isEmpty());
     }
 
-    /*public void handleCreate()
-    {
+    public void handleCreate() throws Exception {
         Stage currentStage = (Stage) listViewEvents.getScene().getWindow();
         Stage newWindow = new Stage();
         newWindow.initModality(Modality.WINDOW_MODAL);
         newWindow.initOwner(currentStage);
 
-        RemoveFriendWindow removeFriendWindow = new RemoveFriendWindow();
-        removeFriendWindow.setUser(user);
-        System.out.println(service.findUser(friend.getId()));
-        removeFriendWindow.setFriend(service.findUser(friend.getId()));
-        removeFriendWindow.setService(service);
-        removeFriendWindow.start(newWindow);
-    }*/
+        CreateEventWindow createEventWindow = new CreateEventWindow();
+        createEventWindow.setUser(user);
+        createEventWindow.setService(service);
+        createEventWindow.start(newWindow);
+    }
 
 }

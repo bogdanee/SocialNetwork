@@ -1,9 +1,15 @@
 package utils;
 
+import javafx.util.converter.LocalDateTimeStringConverter;
+
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Constants {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
+    public static final LocalDateTimeStringConverter STRING_TO_DATE = new LocalDateTimeStringConverter();
     public static final int INF = 99999;
 
     public static final String ERROR_CODE_INVALID_FN = "eroare prenume\n";

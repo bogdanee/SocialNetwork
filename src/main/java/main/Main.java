@@ -30,5 +30,12 @@ public class Main
         service = new Service(userRepo,friendshipRepo, messageRepo, requestRepo, eventRepo, new UserValidator(), new FriendshipValidator());
         LoginWindow loginWindow = new LoginWindow();
         loginWindow.main(args);
+        service.getAllUsers().forEach(x -> {
+            try {
+                System.out.println(x.getUsername() + " " + HashingPassword.hash(x.getPassword()));
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
