@@ -96,7 +96,6 @@ public class LoginController {
             events.add(event1);
             events.add(event2);
             events.add(event3);
-            Stage newStage = new Stage();
             HandlerNotifications handlerNotifications = new HandlerNotifications(events, (int) newWindow.getX(), (int) newWindow.getY());
             handlerNotifications.startThread();
         }

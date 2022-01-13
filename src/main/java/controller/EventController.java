@@ -75,6 +75,7 @@ public class EventController extends MainController{
         listViewSearch.setItems(eventsSearchList);
         setSearchEvents();
         this.hideDetails();
+        this.textAreaDescription.setEditable(false);
         super.setDrawer();
     }
     private void setEvents()
@@ -90,7 +91,7 @@ public class EventController extends MainController{
                     private final Label labelName = new Label();
 
                     {
-                        this.setStyle("-fx-background-color: #000000; -fx-font-size:15;");
+                        this.setStyle("-fx-background-color: #070707; -fx-font-size:15;");
                         labelName.setStyle("-fx-text-fill: white; ");
                         labelDate.setStyle("-fx-text-fill: white; -fx-font-size: 10");
                         vbox.setSpacing(3d);
@@ -191,7 +192,7 @@ public class EventController extends MainController{
 
                     {
 
-                        this.setStyle("-fx-background-color: #1a1a1a; -fx-font-size:13;");
+                        this.setStyle("-fx-background-color: #070707; -fx-font-size:13;");
                         labelName.setStyle("-fx-text-fill: white; ");
 
                         image.setFitWidth(35d);

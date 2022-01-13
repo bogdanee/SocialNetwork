@@ -18,29 +18,29 @@
       <AnchorPane opacity="0.8" prefHeight="420.0" prefWidth="600.0" style="-fx-background-color: black;">
          <children>
             <JFXHamburger fx:id="hamburger" layoutX="14.0" layoutY="14.0" prefWidth="35" prefHeight="35" onMouseClicked="#handleHamburger"/>
-            <ImageView fx:id="imageUser" fitHeight="200.0" fitWidth="200.0" layoutX="73.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="labelErrorImage" layoutX="68.0" layoutY="320.0" prefHeight="18.0" prefWidth="200.0" style="-fx-visibility: no;" text=" " textFill="RED" />
-            <Label fx:id="labelChangeImage" layoutX="68.0" layoutY="284.0" onMouseClicked="#handleChangeImage" style="-fx-text-fill: white;" text="Change your profile photo">
+            <ImageView fx:id="imageUser" fitHeight="220.0" fitWidth="220.0" layoutX="73.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="labelErrorImage" layoutX="68.0" layoutY="334.0" prefHeight="18.0" prefWidth="200.0" style="-fx-visibility: no;" text=" " textFill="RED" />
+            <Label fx:id="labelChangeImage" layoutX="68.0" layoutY="300.0" onMouseClicked="#handleChangeImage" style="-fx-text-fill: white;" text="Change your profile photo">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="textFieldLastName" layoutX="327.0" layoutY="78.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; -fx-border-radius: 3; " />
-            <TextField fx:id="textFieldFirstName" layoutX="327.0" layoutY="153.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; -fx-border-radius: 3; " />
-            <Button fx:id="buttonSave" layoutX="351.0" layoutY="282.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="30.0" prefWidth="151.0" style="-fx-background-color: #248cf0;" text="SAVE CHANGES" textFill="WHITE">
+            <TextField fx:id="textFieldLastName" layoutX="350.0" layoutY="78.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; -fx-border-radius: 3; " />
+            <TextField fx:id="textFieldFirstName" layoutX="350.0" layoutY="153.0" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: black; -fx-text-inner-color: white; -fx-border-color: gray; -fx-border-radius: 3; " />
+            <Button fx:id="buttonSave" layoutX="375.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="30.0" prefWidth="151.0" style="-fx-background-color: #248cf0;" text="SAVE CHANGES" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label fx:id="labelErrorLastName" layoutX="327.0" layoutY="108.0" prefHeight="18.0" prefWidth="200.0" style="-fx-visibility: no;" textFill="RED" text=""/>
-            <Label fx:id="labelErrorFirstName" layoutX="327.0" layoutY="184.0" prefHeight="18.0" prefWidth="200.0" style="-fx-visibility: no;" text=" " textFill="RED" />
+            <Label fx:id="labelErrorLastName" layoutX="350.0" layoutY="108.0" prefHeight="18.0" prefWidth="200.0" style="-fx-visibility: no;" textFill="RED" text=""/>
+            <Label fx:id="labelErrorFirstName" layoutX="350.0" layoutY="184.0" prefHeight="18.0" prefWidth="200.0" style="-fx-visibility: no;" text=" " textFill="RED" />
             <Label fx:id="labelSave" layoutX="335.0" layoutY="320.0" prefHeight="18.0" prefWidth="200.0" style="-fx-visibility: no;" text=" " textFill="WHITE"/>
-            <Label layoutX="327.0" layoutY="51.0" style="-fx-text-fill: white;" text="Last name">
+            <Label layoutX="350.0" layoutY="51.0" style="-fx-text-fill: white;" text="Last name">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="327.0" layoutY="126.0" style="-fx-text-fill: white;" text="First name">
+            <Label layoutX="350.0" layoutY="126.0" style="-fx-text-fill: white;" text="First name">
                <font>
                   <Font size="18.0" />
                </font>

@@ -71,6 +71,11 @@ public class NavDrawerController {
         eventWindow.start(currentStage);
     }
 
+    public void handleReports() throws Exception
+    {
+        //TO DO
+    }
+
     public void handleLogout() throws Exception {
         Stage currentStage = (Stage) buttonLogout.getScene().getWindow();
         LoginWindow loginWindow = new LoginWindow();

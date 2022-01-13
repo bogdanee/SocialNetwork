@@ -55,7 +55,7 @@ public class CreateEventController {
     {
         succesCreate.setVisible(false);
         textAreaDescription.setWrapText(true);
-        imageEvent.setImage(new Image("C:\\ANDA\\Anul 2\\MAP\\Lab\\Teme\\SocialNetwork\\src\\main\\resources\\imgs\\EventDefault.png"));
+        imageEvent.setImage(new Image("/imgs/EventDefault.png"));
     }
 
     public void handleAddImage()
