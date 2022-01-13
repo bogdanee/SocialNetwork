@@ -12,8 +12,7 @@ public class Event {
     private List<Integer> participants;
     private String imageURL;
 
-    public Event(int id, int organiser, String name, String description, LocalDateTime date, List<Integer> participants, String imageURL) {
-        this.id = id;
+    public Event(int organiser, String name, String description, LocalDateTime date, List<Integer> participants, String imageURL) {
         this.organiser = organiser;
         this.name = name;
         this.description = description;

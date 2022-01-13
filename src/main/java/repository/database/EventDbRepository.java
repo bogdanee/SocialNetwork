@@ -21,23 +21,22 @@ public class EventDbRepository {
     }
 
     private String parseListToString(List<Integer> users) {
-        if (users.size() == 1 && users.get(0) == -1)
-            return "";
+        if (users.isEmpty())
+            return ";";
         return users.stream().map(Object::toString)
                 .reduce("", (x, y) -> x + y + ";");
     }
 
     public void add(Event event) {
-        String sql = "insert into events (id, organiser, name, description, date, participants, image) values (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "insert into events (organiser, name, description, date, participants, image) values (?, ?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, event.getId());
-            statement.setInt(2, event.getOrganiser());
-            statement.setString(3, event.getName());
-            statement.setString(4, event.getDescription());
-            statement.setTimestamp(5, Timestamp.valueOf(event.getDate()));
-            statement.setString(6, this.parseListToString(event.getParticipants()));
-            statement.setString(7, event.getImageURL());
+            statement.setInt(1, event.getOrganiser());
+            statement.setString(2, event.getName());
+            statement.setString(3, event.getDescription());
+            statement.setTimestamp(4, Timestamp.valueOf(event.getDate()));
+            statement.setString(5, this.parseListToString(event.getParticipants()));
+            statement.setString(6, event.getImageURL());
 
             statement.executeUpdate();
 
@@ -60,23 +59,19 @@ public class EventDbRepository {
     private Event createEvent(ResultSet resultSet)
     {
         try {
-            int eventId = resultSet.getInt("id");
             int organiser = resultSet.getInt("organiser");
             String name = resultSet.getString("name");
             String description = resultSet.getString("description");
             LocalDateTime date = resultSet.getTimestamp("date").toLocalDateTime();
             String participants = resultSet.getString("participants");
             List<Integer> participantsList = new ArrayList<>();
-            if (participants.equals(""))
-                participantsList.add(-1);
-            else
-            {
-                List<String> participantsString = List.of(participants.split(";"));
-                participantsList = participantsString.stream().map(Integer::parseInt)
+            List<String> participantsString = List.of(participants.split(";"));
+            participantsList = participantsString.stream().map(Integer::parseInt)
                     .collect(Collectors.toList());
-            }
             String imageURL = resultSet.getString("image");
-            return new Event(eventId, organiser, name, description, date, participantsList, imageURL);
+            Event event = new Event(organiser, name, description, date, participantsList, imageURL);
+            event.setId(resultSet.getInt("id"));
+            return event;
         }catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -110,6 +105,7 @@ public class EventDbRepository {
             statement.setTimestamp(4, Timestamp.valueOf(event.getDate()));
             statement.setString(5, this.parseListToString(event.getParticipants()));
             statement.setString(6,event.getImageURL());
+            statement.setInt (7, event.getId());
 
             statement.executeUpdate();
 

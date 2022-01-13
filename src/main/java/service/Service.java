@@ -458,22 +458,26 @@ public class Service extends Observer {
     public void deleteParticipant (int idEvent, int idUser)
     {
         Event event = eventRepo.find(idEvent);
-        eventRepo.delete(idEvent);
         event.getParticipants().remove((Object) idUser);
-        eventRepo.add(event);
+        eventRepo.update(event);
     }
 
     public void addParticipant (int idEvent, int idUser)
     {
         Event event = eventRepo.find(idEvent);
-        eventRepo.delete(idEvent);
         event.getParticipants().add(idUser);
-        eventRepo.add(event);
+        eventRepo.update(event);
     }
 
     public List<Event> getAllEvents()
     {
         return eventRepo.getAll();
+    }
+
+    public void addEvent (int organiser, String name, String desciption, LocalDateTime date, List<Integer> participants, String imageURL)
+    {
+        Event event = new Event(organiser, name, desciption, date, participants, imageURL);
+        eventRepo.add(event);
     }
 
 }
