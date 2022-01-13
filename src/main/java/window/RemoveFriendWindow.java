@@ -27,7 +27,6 @@ public class RemoveFriendWindow extends Application {
 
         RemoveFriendController controller = loader.getController();
         controller.setUser(user);
-        System.out.println(friend);
         controller.setFriend(friend);
         controller.setService(service);
 

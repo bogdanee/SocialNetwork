@@ -33,6 +33,10 @@ public class RemoveFriendController {
     {
         Stage currentStage = (Stage) labelMessage.getScene().getWindow();
         service.deleteFriendship(user.getId(), friend.getId());
+        if (service.findRequest(user.getId(), friend.getId()) != null)
+            service.deleteRequest(user.getId(), friend.getId());
+        if (service.findRequest(friend.getId(), user.getId()) != null)
+            service.deleteRequest(friend.getId(), user.getId());
         service.notifyObservables();
         currentStage.close();
     }
@@ -42,7 +46,6 @@ public class RemoveFriendController {
     }
 
     public void setFriend(User friend) {
-        System.out.println(friend);
         this.friend = friend;
         labelMessage.setText("Do you want to remove "
                 + friend.getLastName() + "\n" + friend.getFirstName()

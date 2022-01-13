@@ -133,7 +133,6 @@ public class FriendsController extends MainController implements Observable {
 
         RemoveFriendWindow removeFriendWindow = new RemoveFriendWindow();
         removeFriendWindow.setUser(user);
-        System.out.println(service.findUser(friend.getId()));
         removeFriendWindow.setFriend(service.findUser(friend.getId()));
         removeFriendWindow.setService(service);
         removeFriendWindow.start(newWindow);

@@ -9,3 +9,7 @@
 .jfx-drawer {
     -fx-background-color: #333333;
 }
+.button-fade:hover{
+    -fx-opacity: 0.5;
+    -fx-cursor: hand;
+}

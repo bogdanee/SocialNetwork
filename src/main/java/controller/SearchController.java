@@ -34,6 +34,9 @@ public class SearchController extends MainController {
     @FXML
     ListView<UserDTO> listView;
 
+    @FXML
+    Label labelError;
+
 
 
     @FXML
@@ -94,6 +97,7 @@ public class SearchController extends MainController {
 
 
                         AnchorPane.setRightAnchor(buttonsAcceptDeny, 1d);
+                        AnchorPane.setTopAnchor(buttonsAcceptDeny, 5d);
                         anchorPane.getChildren().add(buttonsAcceptDeny);
                         buttonsAcceptDeny.getChildren().add(buttonAccept);
                         buttonsAcceptDeny.getChildren().add(buttonDeny);
@@ -186,6 +190,7 @@ public class SearchController extends MainController {
                 .collect(Collectors.toList());
         this.usersList.setAll(usersList);
         listView.setVisible(!usersList.isEmpty());
+        labelError.setVisible(usersList.isEmpty());
 
     }
 

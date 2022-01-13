@@ -1,17 +1,23 @@
 package controller;
 
+import domain.Event;
 import domain.User;
 import javafx.event.ActionEvent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import service.Service;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import utils.HashingPassword;
 import window.FriendsWindow;
+import window.NotificationWindow;
 import window.SearchWindow;
 import window.RegisterWindow;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class LoginController {
@@ -79,7 +85,23 @@ public class LoginController {
             FriendsWindow main = new FriendsWindow();
             main.setUser(user);
             main.start(newWindow);
+
+            List<Integer> users = new ArrayList<>();
+            users.add(1);
+            users.add(2);
+            Event event1 = new Event( 1,"Gratar1", "fain", LocalDateTime.now(), users, "");
+            Event event2 = new Event( 1,"Gratar2", "fain", LocalDateTime.now(), users, "");
+            Event event3 = new Event( 1,"Gratar3", "fain", LocalDateTime.now(), users, "");
+            List<Event> events = new ArrayList<>();
+            events.add(event1);
+            events.add(event2);
+            events.add(event3);
+            Stage newStage = new Stage();
+            HandlerNotifications handlerNotifications = new HandlerNotifications(events, (int) newWindow.getX(), (int) newWindow.getY());
+            handlerNotifications.startThread();
         }
+
+
     }
 
     public void handleCheckBox()

@@ -22,4 +22,6 @@ public class Constants {
     public static final int APPLICATION_WIDTH = 600;
     public static final int APPLICATION_HEIGHT = 420;
     public static final int LOGIN_SIZE = 400;
+    public static final int NOTIFICATION_WIDTH = 300;
+    public static final int NOTIFICATION_HEIGHT = 100;
 }
